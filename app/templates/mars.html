@@ -2,7 +2,34 @@
 {% block title %}Mars{% endblock %}
 
 {% block content %}
-  <h1 class="display-4">Photos from Mars:</h1>
+    <h1 class="display-4" style="color: white; font-weight: bold">Photos from {{ rover.name }}</h1>
+    <div>
+        <p style="color: white">This is from rover {{ rover.name }} who was launched on {{ rover.launch_date }} and landed on
+            {{ rover.landing_date }}. It is currently {{ rover.status }} with the latest photos available
+            from {{ rover.max_date }}.</p>
+    </div>
 
-  <img src="https://via.placeholder.com/500">
+    <div class="form_collect mb-3">
+        <h3 class="mb-3 mt-3" style="color: white">Select a date to view:</h3>
+        <form action={{ url_for("mars_submit", rover_name = rover.name) }} method="post">
+            <div class="form-group date" data-provide="datepicker">
+                <label for="date" style="color: white; font-style: italic">Enter date: </label>
+                <input
+                        type="date"
+                        class="form-control"
+                        name="date" id="date" min="{{ rover.landing_date }}" max="{{ rover.max_date }}"
+                        value="{{ rover.max_date if date is none else date }}" required>
+            </div>
+            <div class="form_item">
+                <Button type="submit" class="btn btn-primary btn-large">Submit</Button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        {% for photo in photos %}
+            <img class="mb-3" src={{ photo }} width=800 height=auto
+                 style="display:block; margin-left: auto; margin-right:auto">
+        {% endfor %}
+    </div>
 {% endblock %}

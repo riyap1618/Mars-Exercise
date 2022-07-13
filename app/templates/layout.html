@@ -8,10 +8,13 @@
 
     <title>{% block title %}{% endblock %}</title>
   </head>
-  <body>
+  <body style="background-color:#ff4500">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <a class="navbar-brand" href="/">Home</a>
-      <a class="navbar-brand" href="/mars">Photos from Mars</a>
+      <a class="navbar-brand" href="{{ url_for("mars", rover_name="curiosity") }}">Curiosity</a>
+      <a class="navbar-brand" href="{{ url_for("mars", rover_name="perseverence") }}">Perseverance</a>
+      <a class="navbar-brand" href="{{ url_for("mars", rover_name="opportunity") }}">Opportunity</a>
+      <a class="navbar-brand" href="{{ url_for("mars", rover_name="spirit") }}">Spirit</a>
     </nav>
 
     <div class="container body-content">
